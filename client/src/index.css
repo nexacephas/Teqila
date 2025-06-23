@@ -1,0 +1,92 @@
+/* ------------------------------
+   THEME: Light / Dark Mode Setup
+------------------------------ */
+/* Light Theme (Default fallback) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #1a1a1a;
+  --accent-color: #6e2aa2;
+  --highlight-color: #9f7aea;
+  --border-color: #e2e2e2;
+  --heading-font: 'Playfair Display', serif;
+  --body-font: 'Poppins', sans-serif;
+}
+
+/* Dark Blue Theme */
+[data-theme="dark"] {
+  --bg-color: #0c1023;               /* Deep navy blue */
+  --text-color: #f1f1f1;
+  --accent-color: #c299ff;           /* Soft lavender */
+  --highlight-color: #ff80bf;        /* Soft pink/purple underline */
+  --border-color: #1d2236;
+}
+
+/* ------------------------------
+   Global Reset & Typography
+------------------------------ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: var(--body-font);
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--heading-font);
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: var(--body-font);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ------------------------------
+   Utility Classes
+------------------------------ */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+  padding: 2rem 0;
+}
+
+.section {
+  padding: 4rem 0;
+}
+
+.text-center {
+  text-align: center;
+}

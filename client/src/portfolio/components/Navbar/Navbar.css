@@ -1,0 +1,243 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: transparent;
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  font-family: var(--heading-font);
+}
+
+/* NAV LINKS */
+.nav-links {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: transparent;
+  flex-direction: column;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease;
+  padding: 0 2rem;
+  display: flex;
+}
+
+.nav-links.mobile-active {
+  max-height: 400px;
+  opacity: 1;
+  padding: 1rem 2rem;
+}
+
+.nav-links ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    position: static;
+    opacity: 1;
+    max-height: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .nav-links ul {
+    flex-direction: row;
+    justify-content: center;
+    gap: 2rem;
+  }
+}
+
+/* NAV ITEMS */
+.nav-links li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.nav-links li svg {
+  margin-right: 4px;
+}
+
+.nav-links li:hover {
+  color: var(--accent-color);
+}
+
+.nav-links li::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 0;
+  height: 3px;
+  background-color: var(--highlight-color);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.nav-links li:hover::after {
+  width: 100%;
+}
+
+.nav-links li.active {
+  color: var(--highlight-color);
+  font-weight: 600;
+}
+
+.nav-links li.active::after {
+  width: 100%;
+}
+
+/* BRAND LINK */
+.brand-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-weight: 500;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.brand-link:hover {
+  background-color: var(--accent-color);
+  color: var(--bg-color);
+}
+
+/* SHOW/HIDE BRAND LINK BASED ON DEVICE */
+@media (max-width: 768px) {
+  .brand-link {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .mobile-only {
+    display: none;
+  }
+
+  .desktop-only {
+    display: flex;
+  }
+}
+
+/* ACTIONS */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.4s ease;
+}
+
+.theme-toggle:active {
+  transform: rotate(180deg);
+}
+
+.theme-toggle:hover {
+  color: var(--accent-color);
+}
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  width: 28px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 100%;
+  background-color: var(--text-color);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+/* Hide on desktop */
+.mobile-only {
+  display: none;
+}
+
+/* Hide on mobile */
+.desktop-only {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .mobile-only {
+    display: block;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+}
