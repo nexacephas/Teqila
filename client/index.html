@@ -1,12 +1,49 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <title>Ibidola Ajoke | Fashion Designer</title>
+
+    <!-- Preloading Fonts/Styles (optional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  integrity="sha512-...YOUR-INTEGRITY..."
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+    <!-- Prevent FOUC (Flash of Unstyled Content) -->
+    <style>
+      html[data-theme='dark'] {
+        background-color: #0c1023;
+        color: #f1f1f1;
+      }
+      html[data-theme='light'] {
+        background-color: #ffffff;
+        color: #1a1a1a;
+      }
+      body.loading * {
+        transition: none !important;
+      }
+    </style>
   </head>
-  <body>
+
+  <body class="loading">
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Remove loading class after hydration
+      window.addEventListener('DOMContentLoaded', () => {
+        document.body.classList.remove('loading');
+      });
+    </script>
   </body>
 </html>

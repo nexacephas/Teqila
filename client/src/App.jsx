@@ -1,6 +1,6 @@
 // src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import { useEffect } from 'react';
 // Portfolio Pagesimport PortfolioHero from './portfolio/components/Hero';
 // import About from './portfolio/pages/About';
 // import Projects from './portfolio/pages/Projects';
@@ -23,6 +23,10 @@ import Footer from './portfolio/components/Footer/Footer';
 // import Contact from './brand/pages/Contact';
 
 function App() {
+   useEffect(() => {
+    document.body.classList.remove('loading');
+    document.body.classList.add('loaded'); // Optional: can be used for entry animations
+  }, []);
   return ( 
     <>
       <Navbar/>

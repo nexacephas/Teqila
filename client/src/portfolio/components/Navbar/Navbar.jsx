@@ -4,6 +4,7 @@ import {
   FaHome,
   FaUser,
   FaFolderOpen,
+  FaCommentDots,
   FaEnvelope,
   FaMoon,
   FaSun,
@@ -15,25 +16,37 @@ const Navbar = () => {
   const [active, setActive] = useState('home');
   const [darkTheme, setDarkTheme] = useState(true);
 
+  // Load theme from localStorage on initial render
+  useEffect(() => {
+    const storedTheme = localStorage.getItem('theme');
+    const isDark = storedTheme === 'dark' || !storedTheme;
+    setDarkTheme(isDark);
+    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+  }, []);
+
+  // Persist theme change
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', darkTheme ? 'dark' : 'light');
+    localStorage.setItem('theme', darkTheme ? 'dark' : 'light');
+  }, [darkTheme]);
+
   const toggleTheme = () => {
-    setDarkTheme(!darkTheme);
-    document.documentElement.setAttribute('data-theme', darkTheme ? 'light' : 'dark');
+    setDarkTheme(prev => !prev);
   };
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-    setActive(id);
-    setMobileOpen(false);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      setActive(id);
+      setMobileOpen(false);
+    }
   };
 
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }, []);
-
+  // Handle active link on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'about', 'projects', 'contact'];
+      const sections = ['home', 'about', 'projects', 'testimonials', 'contact'];
       let current = active;
 
       for (let id of sections) {
@@ -60,7 +73,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="logo">Ibidola Ajoke</div>
 
-        {/* Nav Links */}
+        {/* Navigation Links */}
         <div className={`nav-links ${mobileOpen ? 'mobile-active' : ''}`}>
           <ul>
             <li className={active === 'home' ? 'active' : ''} onClick={() => scrollTo('home')}>
@@ -72,11 +85,13 @@ const Navbar = () => {
             <li className={active === 'projects' ? 'active' : ''} onClick={() => scrollTo('projects')}>
               <FaFolderOpen /> Projects
             </li>
+            <li className={active === 'testimonials' ? 'active' : ''} onClick={() => scrollTo('testimonials')}>
+              <FaCommentDots /> Testimonials
+            </li>
             <li className={active === 'contact' ? 'active' : ''} onClick={() => scrollTo('contact')}>
               <FaEnvelope /> Contact
             </li>
-
-            {/* Brand Button - Mobile only */}
+            {/* Brand Link — Mobile Only */}
             <li className="mobile-only">
               <a className="brand-link" href="/brand">
                 <FaExternalLinkAlt /> Brand Site
@@ -85,20 +100,24 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Right Side Actions */}
+        {/* Actions: Theme Toggle, Brand Link, Hamburger */}
         <div className="actions">
-          {/* Theme Toggle */}
-          <button className="theme-toggle" onClick={toggleTheme}>
+          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
             {darkTheme ? <FaSun /> : <FaMoon />}
           </button>
 
-          {/* Brand Button - Desktop only */}
           <a className="brand-link desktop-only" href="/brand">
             <FaExternalLinkAlt /> Brand Site
           </a>
 
-          {/* Hamburger Menu */}
-          <div className={`hamburger ${mobileOpen ? 'active' : ''}`} onClick={() => setMobileOpen(!mobileOpen)}>
+          <div
+            className={`hamburger ${mobileOpen ? 'active' : ''}`}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle navigation menu"
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setMobileOpen(!mobileOpen)}
+          >
             <span />
             <span />
             <span />

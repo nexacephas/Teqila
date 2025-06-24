@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState, useRef } from 'react';
 import './Projects.css';
 import { FaSearch, FaTimes } from 'react-icons/fa';
 import AOS from 'aos';
@@ -18,10 +18,44 @@ const categories = ['All', 'Runway', 'Custom', 'Editorial'];
 const Projects = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProject, setSelectedProject] = useState(null);
+  const modalRef = useRef();
 
   useEffect(() => {
     AOS.init({ duration: 800 });
   }, []);
+
+  // Escape key & tab trap
+  useEffect(() => {
+    const handleEsc = (e) => {
+      if (e.key === 'Escape') setSelectedProject(null);
+    };
+
+    const handleTab = (e) => {
+      if (selectedProject && modalRef.current) {
+        const focusable = modalRef.current.querySelectorAll('button, [href], [tabindex]:not([tabindex="-1"])');
+        const first = focusable[0], last = focusable[focusable.length - 1];
+
+        if (e.key === 'Tab') {
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              e.preventDefault(); last.focus();
+            }
+          } else {
+            if (document.activeElement === last) {
+              e.preventDefault(); first.focus();
+            }
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleEsc);
+    window.addEventListener('keydown', handleTab);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+      window.removeEventListener('keydown', handleTab);
+    };
+  }, [selectedProject]);
 
   const filtered = selectedCategory === 'All'
     ? projectData
@@ -43,12 +77,12 @@ const Projects = () => {
         ))}
       </div>
 
-      <div className="project-grid">
+      <div className="project-grid masonry">
         {filtered.map(project => (
           <div
-            className="project-card"
+            className="project-card hover-animate"
             key={project.id}
-            data-aos="fade-up"
+            data-aos="zoom-in"
             onClick={() => setSelectedProject(project)}
           >
             <img src={project.img} alt={project.title} />
@@ -63,8 +97,13 @@ const Projects = () => {
 
       {/* Modal */}
       {selectedProject && (
-        <div className="modal" onClick={() => setSelectedProject(null)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
+        <div className="modal fade-in" onClick={() => setSelectedProject(null)}>
+          <div
+            className="modal-content"
+            onClick={e => e.stopPropagation()}
+            ref={modalRef}
+            tabIndex={-1}
+          >
             <button className="close-btn" onClick={() => setSelectedProject(null)}>
               <FaTimes />
             </button>

@@ -105,4 +105,63 @@
   .contact-info {
     align-items: center;
   }
+}.error {
+  border: 1px solid #e63946;
 }
+
+.error-tooltip {
+  color: #e63946;
+  font-size: 0.8rem;
+  margin-top: -0.5rem;
+  margin-bottom: 0.8rem;
+  display: block;
+}
+
+.phone-input input {
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+.phone-input input:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+.phone-input .country-code {
+  width: 80px;
+  padding: 0.7rem;
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid var(--border-color);
+}
+.phone-input .country-code:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+.phone-input .phone-number {
+  flex: 1;
+  padding: 0.7rem;
+  border-radius: 0 4px 4px 0;
+  border: 1px solid var(--border-color);
+}
+.phone-input .phone-number:focus {
+  border-color: var(--accent-color);
+  outline: none;
+}
+.phone-input {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}.socials a {
+  font-size: 1.3rem;
+  margin-right: 1rem;
+  color: var(--accent-color);
+  transition: transform 0.2s ease;
+}
+
+.socials a:hover {
+  transform: scale(1.2);
+  color: var(--highlight-color);
+}
+

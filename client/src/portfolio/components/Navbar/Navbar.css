@@ -9,7 +9,7 @@
 }
 
 .navbar-container {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: auto;
   padding: 1rem 2rem;
   display: flex;
@@ -39,6 +39,7 @@
   transition: max-height 0.4s ease, opacity 0.4s ease;
   padding: 0 2rem;
   display: flex;
+  margin-left: 10px;
 }
 
 .nav-links.mobile-active {
@@ -241,3 +242,50 @@
     display: none;
   }
 }
+.nav-buttons button {
+  background: transparent;
+  border: 2px solid var(--accent-color);
+  color: var(--accent-color);
+  padding: 0.4rem 0.8rem;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.nav-buttons button:hover {
+  background: var(--accent-color);
+  color: var(--bg-color);
+}
+.nav-buttons {
+  display: flex;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.nav-buttons.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-buttons.hidden {
+  pointer-events: none;
+}
+
+/* .swiper-button-prev,
+.swiper-button-next {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background: var(--highlight-color);
+} */
